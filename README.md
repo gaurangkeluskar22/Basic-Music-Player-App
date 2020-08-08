@@ -15,22 +15,43 @@ A basic music player app, where you can upload your favourite songs and enjoy so
 
 ## Notification
 
-<p float="center">
+  <p>
+   &nbsp&nbsp&nbsp&nbsp
+   &nbsp&nbsp&nbsp&nbsp
+   &nbsp&nbsp&nbsp&nbsp
   <img src="https://github.com/gaurangkeluskar22/Basic-Music-Player-App/blob/master/images/noti1.jpeg" width="260" />
   &nbsp&nbsp&nbsp&nbsp
+   &nbsp&nbsp&nbsp&nbsp
+   &nbsp&nbsp&nbsp&nbsp
+   &nbsp&nbsp&nbsp&nbsp
+   &nbsp&nbsp&nbsp&nbsp
   <img src="https://github.com/gaurangkeluskar22/Basic-Music-Player-App/blob/master/images/noti2.jpeg" width="260" />
-</p>
+  </p>
 
 ## Home & Upload Section
-<p float="center">
+<p>
+  &nbsp&nbsp&nbsp&nbsp
+   &nbsp&nbsp&nbsp&nbsp
+   &nbsp&nbsp&nbsp&nbsp
 <img src="https://github.com/gaurangkeluskar22/Basic-Music-Player-App/blob/master/images/frontpage.jpeg" width="260"/>
  &nbsp&nbsp&nbsp&nbsp
+   &nbsp&nbsp&nbsp&nbsp
+   &nbsp&nbsp&nbsp&nbsp
+   &nbsp&nbsp&nbsp&nbsp
+   &nbsp&nbsp&nbsp&nbsp
 <img src="https://github.com/gaurangkeluskar22/Basic-Music-Player-App/blob/master/images/upload.jpeg" width="260"/>
 </p>
 
 ## Song player Section
-<p float="center">
+<p>
+   &nbsp&nbsp&nbsp&nbsp
+   &nbsp&nbsp&nbsp&nbsp
+   &nbsp&nbsp&nbsp&nbsp
 <img src="https://github.com/gaurangkeluskar22/Basic-Music-Player-App/blob/master/images/songplay1.jpeg" width="260"/>
 &nbsp&nbsp&nbsp&nbsp
+   &nbsp&nbsp&nbsp&nbsp
+   &nbsp&nbsp&nbsp&nbsp
+   &nbsp&nbsp&nbsp&nbsp
+   &nbsp&nbsp&nbsp&nbsp
 <img src="https://github.com/gaurangkeluskar22/Basic-Music-Player-App/blob/master/images/spongplay2.jpeg" width="260"/>
 </p>
