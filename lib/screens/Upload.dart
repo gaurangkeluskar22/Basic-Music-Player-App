@@ -6,110 +6,113 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 
-
 class Upload extends StatefulWidget {
   @override
   _UploadState createState() => _UploadState();
 }
 
 class _UploadState extends State<Upload> {
-  TextEditingController songname=TextEditingController();
-  TextEditingController artistname=TextEditingController();
+  TextEditingController songname = TextEditingController();
+  TextEditingController artistname = TextEditingController();
 
-File image,song;
-String imagepath,songpath;
-StorageReference ref;
-var image_down_url,song_down_url;
-final firestoreinstance=Firestore.instance;
+  File image, song;
+  String imagepath, songpath;
+  StorageReference ref;
+  var image_down_url, song_down_url;
+  final firestoreinstance = Firestore.instance;
 
-  void selectimage()async {
-    image=await FilePicker.getFile();
+  void selectimage() async {
+    image = await FilePicker.getFile();
 
     setState(() {
-      image=image;
-      imagepath=basename(image.path);
-      uploadimagefile(image.readAsBytesSync(),imagepath);
+      image = image;
+      imagepath = basename(image.path);
+      uploadimagefile(image.readAsBytesSync(), imagepath);
     });
   }
 
-  Future<String> uploadimagefile(List<int> image, String imagepath) async{
-    ref=FirebaseStorage.instance.ref().child(imagepath);
-    StorageUploadTask uploadTask=ref.putData(image);
+  Future<String> uploadimagefile(List<int> image, String imagepath) async {
+    ref = FirebaseStorage.instance.ref().child(imagepath);
+    StorageUploadTask uploadTask = ref.putData(image);
 
-    image_down_url=await (await uploadTask.onComplete).ref.getDownloadURL();
+    image_down_url = await (await uploadTask.onComplete).ref.getDownloadURL();
   }
 
-  void selectsong() async{
-    song=await FilePicker.getFile();
+  void selectsong() async {
+    song = await FilePicker.getFile();
 
     setState(() {
-      song=song;
-      songpath=basename(song.path);
-      uploadsongfile(song.readAsBytesSync(),songpath);
+      song = song;
+      songpath = basename(song.path);
+      uploadsongfile(song.readAsBytesSync(), songpath);
     });
   }
 
-    Future<String> uploadsongfile(List<int> song, String songpath) async{
-    ref=FirebaseStorage.instance.ref().child(songpath);
-    StorageUploadTask uploadTask=ref.putData(song);
+  Future<String> uploadsongfile(List<int> song, String songpath) async {
+    ref = FirebaseStorage.instance.ref().child(songpath);
+    StorageUploadTask uploadTask = ref.putData(song);
 
-    song_down_url=await (await uploadTask.onComplete).ref.getDownloadURL();
+    song_down_url = await (await uploadTask.onComplete).ref.getDownloadURL();
   }
 
-  finalupload(){
-    var data={
-      "song_name":songname.text,
-      "artist_name":artistname.text,
-      "song_url":song_down_url.toString(),
-      "image_url":image_down_url.toString(),
+  finalupload(context) {
+    var data = {
+      "song_name": songname.text,
+      "artist_name": artistname.text,
+      "song_url": song_down_url.toString(),
+      "image_url": image_down_url.toString(),
     };
 
-    firestoreinstance.collection("songs").document().setData(data);
+    firestoreinstance
+        .collection("songs")
+        .document()
+        .setData(data)
+        .whenComplete(() => showDialog(
+              context: context,
+              builder: (context) => _onTapButton(context),
+            ));
   }
 
-     
-  
+  _onTapButton(BuildContext context) {
+    return AlertDialog(title: Text("Files Uploaded Successfully :)"));
+  }
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        children: <Widget>[
-          RaisedButton(
-            onPressed: ()=>selectimage(),
-            child: Text("Select Image"),
-          ),
-          RaisedButton(
-            onPressed: ()=>selectsong(),
-            child: Text("Select Song"),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-              child: TextField(
-                controller: songname,
-              decoration: InputDecoration(
-                hintText: "Enter song name",
-              ),
+        child: Column(
+      children: <Widget>[
+        RaisedButton(
+          onPressed: () => selectimage(),
+          child: Text("Select Image"),
+        ),
+        RaisedButton(
+          onPressed: () => selectsong(),
+          child: Text("Select Song"),
+        ),
+        Padding(
+          padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          child: TextField(
+            controller: songname,
+            decoration: InputDecoration(
+              hintText: "Enter song name",
             ),
           ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-              child: TextField(
-                controller: artistname,
-              decoration: InputDecoration(
-                hintText: "Enter artist name",
-              ),
+        ),
+        Padding(
+          padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          child: TextField(
+            controller: artistname,
+            decoration: InputDecoration(
+              hintText: "Enter artist name",
             ),
           ),
-          RaisedButton(
-            onPressed: ()=>finalupload(),
-            child: Text(
-              "Upload"
-            ),
-          ),
-        ],
-      )
-      
-    );
+        ),
+        RaisedButton(
+          onPressed: () => finalupload(context),
+          child: Text("Upload"),
+        ),
+      ],
+    ));
   }
 }
