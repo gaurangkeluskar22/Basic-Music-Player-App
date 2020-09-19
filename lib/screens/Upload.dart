@@ -56,6 +56,12 @@ class _UploadState extends State<Upload> {
   }
 
   finalupload(context) {
+    if(songname.text!=''   && song_down_url!=null && image_down_url!=null){
+      print(songname.text);
+      print(artistname.text);
+      print(song_down_url);
+      print(image_down_url.toString());
+
     var data = {
       "song_name": songname.text,
       "artist_name": artistname.text,
@@ -69,12 +75,19 @@ class _UploadState extends State<Upload> {
         .setData(data)
         .whenComplete(() => showDialog(
               context: context,
-              builder: (context) => _onTapButton(context),
+              builder: (context) => _onTapButton(context,"Files Uploaded Successfully :)"),
             ));
+    }
+    else{
+        showDialog(
+              context: context,
+              builder: (context) => _onTapButton(context,"Please Enter All Details :("),
+            );
+    }
   }
 
-  _onTapButton(BuildContext context) {
-    return AlertDialog(title: Text("Files Uploaded Successfully :)"));
+  _onTapButton(BuildContext context,data) {
+    return AlertDialog(title: Text(data));
   }
 
   @override
