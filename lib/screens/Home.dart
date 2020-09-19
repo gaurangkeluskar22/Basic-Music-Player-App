@@ -10,7 +10,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   Future getdata() async {
     QuerySnapshot qn =
-        await Firestore.instance.collection('songs').getDocuments();
+        await Firestore.instance.collection('songs').orderBy('song_name').getDocuments();
     return qn.documents;
   }
 
