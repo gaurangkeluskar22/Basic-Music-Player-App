@@ -84,11 +84,11 @@ class _SongspageState extends State<Songspage> {
                           });
 
                           musicPlayer.play(MusicItem(
-                          trackName: widget.song_name,
+                          trackName: widget.song_name==null?'':widget.song_name,
                           albumName: '',
-                          artistName: widget.artist_name,
-                          url: widget.song_url,
-                          coverUrl: widget.image_url,
+                          artistName: widget.artist_name==null?'':widget.artist_name,
+                          url: widget.song_url==null?'':widget.song_url,
+                          coverUrl: widget.image_url==null?'':widget.image_url,
                           duration: Duration(seconds: 255),
                         ));
                     }
