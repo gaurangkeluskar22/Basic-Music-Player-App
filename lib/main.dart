@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:music_player_app/screens/Home.dart';
 import 'package:music_player_app/screens/Upload.dart';
 
-void main() => runApp(MyApp());
+import 'package:firebase_core/firebase_core.dart';
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -10,6 +16,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  
   int currentindex = 0;
 
   List tabs = [
