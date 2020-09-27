@@ -27,6 +27,7 @@ dependencies:
   cloud_functions: ^0.6.0
   firebase_admin: ^0.1.3
   firebase_storage: any
+  firebase_admob: ^0.9.0+1
 
 
   

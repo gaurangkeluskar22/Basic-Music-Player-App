@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
+import 'package:music_player_app/main.dart';
 
 class Upload extends StatefulWidget {
   @override
@@ -12,6 +14,41 @@ class Upload extends StatefulWidget {
 }
 
 class _UploadState extends State<Upload> {
+
+  static const MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+    nonPersonalizedAds: true,
+  );
+
+  BannerAd _bannerAd1;
+
+  BannerAd createBannerAd() {
+    return BannerAd(
+      adUnitId: 'ca-app-pub-6665765954949461/6038232188',
+      size: AdSize.banner,
+    );
+  }
+
+
+  @override
+  void initState() {
+    FirebaseAdMob.instance
+        .initialize(appId: 'ca-app-pub-6665765954949461~8831916485');
+    _bannerAd1 = createBannerAd();
+    super.initState();
+
+    show_banner_ads1();
+
+  }
+
+  void show_banner_ads1() {
+        _bannerAd1
+      ..load()
+      ..show(
+        anchorOffset: 0.0,
+        anchorType: AnchorType.bottom,
+      );
+  }
+
   TextEditingController songname = TextEditingController();
   TextEditingController artistname = TextEditingController();
 
@@ -125,7 +162,9 @@ class _UploadState extends State<Upload> {
           onPressed: () => finalupload(context),
           child: Text("Upload"),
         ),
+
       ],
-    ));
+    )
+    );
   }
 }
